@@ -1,0 +1,114 @@
+nav{
+    background: #003359;
+}
+
+nav img{
+    width: 100px;
+    margin: 10px 0; 
+}
+footer{
+    background: #406683;
+    padding: 30px 0;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+footer span{
+    color: #fff !important;
+    font-size: 14px;
+}
+.container {
+    width: 1160px;
+}
+
+.btn-primary{
+    background: #003359;
+}
+.add-new-section{
+    margin: 20px 20px 20px 0;
+    position: relative;
+    text-align: right;
+}
+.add-new-btn{
+    border-radius: 0;
+    padding: 10px;
+}
+.add-new-btn:hover{
+    background: #efefef;
+    color: #000000;
+    border: 1px solid #efefef;
+}
+.nav-tabs li{
+    background: #003359;
+    color: #fff;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.nav-tabs li:hover, .nav-tabs li.active{
+    background: #eee;
+    color: #000;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.nav-tabs li a{
+    color: #fff;
+}
+
+.nav-tabs li:hover a,.nav-tabs li.active a{
+    background: none;
+    color: #000;
+}
+.panel-heading,
+.panel-body {
+    padding: 0;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.panel-default > .panel-heading {
+    background: none;
+    border: none;
+}
+.table-responsive {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    padding: 10px 20px;
+}
+.panel-default {
+    border: none;
+}
+
+.form-control{
+    width: 66.6667%;
+}
+.modal-body{
+    display: inline-block;
+    width: 100%;
+    padding: 30px 10px;
+}
+.modal-header .close{
+    color: #999;
+    line-height: 2;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 1;
+
+}
+.form-group{
+    width: 100%;
+    display: inline-block;
+}
+.form-group label{
+    font-weight: normal;
+}

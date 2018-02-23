@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Outage Notification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="outage.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script>function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }</script>
+ 
+    <style>
+    .modal{
+    display: inline;
+    z-index: 999999;
+    }
+    </style>
+</head>
+<body>
+   <script>
+                                                    $.get('http://localhost:8080/Notifications/api/notification/get/messageID/'+urlParams["messageID"])', function(data, status) {
+
+                                                        data = $.parseJSON(data);                                                        var a, b;
+                                                        $.each(data, function(i, item) {
+
+                                                     
+                                                            alert(data);
+                                                            
+                                                            
+					
+                                                        });
+
+                                                    });
+                                                </script>
+<div class="modal" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content col-md-12">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="window.location= 'tool.html'"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">Edit your Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-md-4">Message</label>
+                            <textarea id="message" rows="2" class="form-control col-md-8" placeholder="hiasdasdsasad"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4">Center ID</label>
+                            <select class="form-control col-md-8" id="centerID">
+                               <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                                <label class="col-md-4">Territory ID</label>
+                                <select class="form-control col-md-8" id="masterID">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                    <option>10</option>
+                                    
+                                </select>
+                            </div>
+                        <div class="form-group">
+                            <label class="col-md-4">Start Date</label>
+                            <input class="form-control col-md-8" id="startDate" type="text" placeholder="DD-MM-YYYY">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4">End Date</label>
+                            <input class="form-control col-md-8" id="endDate" type="text" placeholder="DD-MM-YYYY">
+                        </div>
+                    </div>
+                    <div class="modal-footer ">
+                        <button id="updateNotifications" onclick="sendData();window.close();" type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Submit</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+   <script>
+    document.getElementById("message").value=getParameterByName('message');
+    
+    var startDate =getParameterByName('startDate').split('-');
+    var endDate =getParameterByName('endDate').split('-');
+
+  
+  
+    document.getElementById("startDate").value=startDate[2].substring(0,2)+"-"+startDate[1]+"-"+startDate[0];
+    document.getElementById("endDate").value=endDate[2].substring(0,2)+"-"+endDate[1]+"-"+endDate[0];
+    document.getElementById("centerID").value=getParameterByName('centerID');
+    document.getElementById("masterID").value=getParameterByName('masterID');
+    
+    
+    function sendData()
+    {
+    	 alert("hivvv");
+          $.get('http://localhost:8080/Notifications/api/notification/update/'+getParameterByName('messageID')+"/"+ document.getElementById("startDate").value+"/"+ document.getElementById("endDate").value+"/"+document.getElementById("message").value, function(data, status) {
+
+                   self.close();   });
+          self.close();
+          window.close();
+
+    
+     
+    }
+    
+    function deleteMessage()
+    {
+    	
+          $.get('http://localhost:8080/Notifications/api/notification/delete/'+getParameterByName('messageID'), function(data, status) {
+
+                 alert(data);        });
+
+    
+     
+    }
+    
+    </script>
+    
+    
+</body>
+</html>

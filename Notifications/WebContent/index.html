@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html >
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+    <script data-require="angular.js@1.1.5" data-semver="1.1.5" src="http://code.angularjs.org/1.1.5/angular.min.js"></script>
+    <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+
+<meta charset="ISO-8859-1">
+<title>Index Page</title>
+</head>
+<style>
+.carousel-indicators li {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin: 10px;
+    text-indent: 0;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    background-color: green;
+    box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.5);    
+}
+.carousel-indicators .active {
+    width: 18px;
+    height: 18px;
+    margin: 10px;
+    background-color: red;
+}
+#element1 {display:inline-block;margin-right:10px;} 
+#element2 {display:inline-block;} 
+</style>
+<body  ng-app="controlPanel" ng-controller="myCtrl">
+
+
+<div class="container">
+<div style="float:left;">ZONE-1<input type="radio"   id="zones"  name="zones"   ng-model="zone"  value="z1" checked></div>
+<h3 align="center"> Issues Control Panel</h3> ZONE-2<input type="radio"  id="zones"   name="zones"   ng-model="zone"  value="z2"> </div>
+
+<a class="list-group-item list-group-item-info" data-toggle="collapse" data-target="#test"><span id="spanname" class="glyphicon glyphicon-collapse-up"></span>&nbsp;&nbsp;&nbsp;&nbsp;Force Sync Profiles/Contracts</a>
+
+  <!--  start - TEST -->
+  <div id="test" class="collapse text-center">
+
+<div class="container" >
+  <div id="myCarousel" class="carousel slide " data-interval="false" >
+  
+   <ol class="carousel-indicators" >
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+     <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+  </ol><br><br><br>
+
+    <div class="carousel-inner">
+
+      <div class="item active">
+       <div style="background-image: url('/Notifications/images/transpa.jpg')" id="studentSync1" class="text-center">
+       <h2>Student Profile Sync</h2><br><br><br>
+          <div><b> Login: </b> <input type="text" ng-model="studentprofilelogin" class="inputText"> </div>
+         <button type="button" ng-click="studentProfileSync()" style="float:none" class="btn btn-primary active"> Submit </button><br/><br/> 
+         <pre>  <span style="color:red">   {{studentMessage}}</span> </pre>
+       <p style="color:red"><span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span></p>
+   </div>
+   
+      </div>
+
+      <div class="item">
+       <div style="background-image: url('/Notifications/images/transpa3.jpg')" id="studentContractSync1" class="text-center">
+       <h2>Student Contract Sync</h2><br><br><br>
+          <div> <b> Login: </b> <input type="text" ng-model="studentcontractlogin" class="inputText"> </div>
+         <button type="button" ng-click="studentContractSync()" style="float:none" class="btn btn-primary"> Submit </button><br/><br/><pre> <span style="color:red">   {{studentContractMessage}}</span></pre>  
+       <p style="color:red"><span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span></p>
+   </div>   
+      </div>
+      
+           <div class="item">
+       <div style="background-image: url('/Notifications/images/transpa3.jpg')" id="reassignConsultantSync" class="text-center">
+       <h2>Re-assign Consultant Sync</h2><br><br><br>
+          <div> <b> Login: </b> <input type="text" ng-model="studentcontractlogin" class="inputText"> </div>
+         <button type="button" ng-click="reassignConsultantSync()" style="float:none" class="btn btn-primary"> Submit </button><br/><br/><pre> <span style="color:red">   {{studentContractMessage}}</span></pre>  
+       <p style="color:red"><span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span></p>
+   </div>   
+      </div>
+      
+          <div class="item">
+       <div style="background-image: url('/Notifications/images/transpa3.jpg')" id="reassignPTSync" class="text-center">
+       <h2>Re-assign Personal Tutor Sync</h2><br><br><br>
+          <div> <b> Login: </b> <input type="text" ng-model="studentcontractlogin" class="inputText"> </div>
+         <button type="button" ng-click="reassignPT()" style="float:none" class="btn btn-primary"> Submit </button><br/><br/><pre> <span style="color:red">   {{studentContractMessage}}</span></pre>  
+       <p style="color:red"><span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span></p>
+   </div>   
+      </div>
+      
+      
+    
+      <div class="item" width="100%" >
+        <div style="background-image: url('/Notifications/images/transpa2.jpg');background-color:pink" id="forcesync1" class="text-center"  width="1000px">        
+       <h2>Bulk  contracts sync through XLS file</h2><br><br><br>       
+	  <form id="formUpload"  method="post" enctype="multipart/form-data">		 
+		        <div width="100%" style="background-color:pink;float:left" align="center">
+                   <input type="file" id="file" name="file" style="background-color:pink">
+                </div>
+				 <div style="float:left">
+				   <input type="submit" class="btn btn-primary active" value="Submit" onclick="submitUpload()" />
+				 </div>   
+      </form>
+       <p style="color:red"><span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span></p>
+ </div>
+    
+      </div>
+  
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev" data-interval="false">
+         
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next" data-interval="false">
+   
+    </a>
+  </div>
+</div>
+   </div>
+     <!--  end of -  TEST -->
+     
+     
+
+     <!--  end of -  key not found control panel -->
+<a class="list-group-item list-group-item-warning" ng-click="changeClass()"  data-toggle="collapse" data-target="#demo"><span id="spanname" class="glyphicon glyphicon-collapse-up"></span>&nbsp;&nbsp;&nbsp;&nbsp;Key Not Found for Transfer Student</a>
+
+  
+  <!--  start - key not found control panel -->
+  <div style="background-image: url('/Notifications/images/transpa.jpg')"  id="demo" class="collapse text-center">
+       <h2>Key Not Found Issue For Transfer Students</h2><br><br><br>
+       <button type="button" ng-click="currentLevel()" style="float:none" class="btn btn-primary active"> Click to Run Procedure!! </button>   <span style="color:red;font-weight:bold">   {{status}}</span>  
+       <p style="color:red"><span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span></p>
+   </div>
+     <!--  end of -  key not found control panel -->
+     
+
+     <!--  end  of studentContractSync  -->
+
+
+<a class="list-group-item list-group-item-success"  data-toggle="collapse" data-target="#activateOR"><span id="spanname" class="glyphicon glyphicon-collapse-up"></span>&nbsp;&nbsp;&nbsp;&nbsp;Activate OR contract</a>
+
+
+     
+  <!--  start of activate OR -->
+  <div style="background-image: url('/Notifications/images/transpa.jpg')"  id="activateOR" class="collapse text-center">
+       <h2>Activate OR contract</h2><br><br><br>
+          <span> <b> Login: </b>  <input type="text" ng-model="user" class="inputText"> </span>
+             <span> <b>AYCL: </b> <input type="text" ng-model="aycl" class="inputText"> </span>
+                <span> <b>Ticket Number:</b>  <input type="text" ng-model="sdno" class="inputText"> </span>
+       <button type="button" ng-click="actOR()" style="float:none" class="btn btn-primary active"> Submit </button><br/><br/>   <span style="color:red;font-weight:bold">   {{status1}}</span>  
+       <p style="color:red"><span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span></p>
+   </div>
+     <!--  end  of activate OR  -->
+     
+     
+     
+  <a  data-toggle="modal" data-target="#myModal" class="list-group-item list-group-item-info"><span class="glyphicon glyphicon-modal-window"></span>&nbsp;&nbsp;&nbsp;&nbsp; Student Cancellation</a>
+
+    <!--  start of getEmployees  -->
+    
+      <div class="panel-group" style="margin-bottom: 0px">
+    <div class="panel panel-default">
+      <div class="panel-heading" style="padding:0">
+        <h4 class="panel-title">
+          <a style="font-weight: normal;font-size:14px" ng-click="changeClass()" data-toggle="collapse"  class="list-group-item list-group-item-danger" href="#collapse1" ><span id="spanname1" class="glyphicon glyphicon-collapse-up"></span>&nbsp;&nbsp;&nbsp;&nbsp;Employees Datacard By Center</a>
+        </h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse">
+         <div class="panel-body">
+            <span> Search:  <input type="text" ng-model="curPlace" class="inputText"> </span>
+            
+          <b> Select Center: </b>    
+          <select data-placeholder="Choose a center..." style="width:400px" ng-model="center" ng-change="makeTodos()" data-toggle="collapse" size=10>
+		       <option style="background-color:pink" ng-repeat="x in names | filter:curPlace" value="{{x.id}}">{{x.name+"-"+x.id}}</option>
+		    </select>
+		     <button type="button" ng-click="populateEmployeeCenters()" class="btn btn-primary active">Populate </button>		    
+		    <span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span>
+		  </div>
+        <div class="panel-footer"> 
+        
+           <h2>Center Employees - {{center}}</h2>           
+           <table class="table table-striped">
+	         <thead>
+		         <tr>
+			         <th style="text-align:center">ID</th>
+			         <th style="text-align:center">LOGIN</th>
+			         <th style="text-align:center">PASSWORD</th>
+			         <th style="text-align:center">CATEGORY TYPE</th>
+		         </tr>
+	         </thead>
+	        <tbody>
+	        <tr ng-repeat="todo in filteredTodos">
+		        <td>{{todo.id}}</td>
+		        <td>{{todo.login}}</td>
+		        <td>{{todo.password}}</td> 
+		         <td>{{todo.categoryRef}}</td>
+	        </tr>
+	
+	       <div data-pagination="" data-num-pages="numPages()"  data-current-page="currentPage" data-max-size="maxSize"  data-boundary-links="true"></div>      
+	       </tbody>
+         </table> </div>
+      </div>
+    </div>
+  </div>
+    <!-- End Employee DataCard -->
+    
+        <!--Start of employee Search  -->
+    
+      <div class="panel-group" style="margin-bottom: 0px" >
+    <div class="panel panel-default">
+      <div class="panel-heading" style="padding:0">
+        <h4 class="panel-title">
+          <a style="font-weight: normal;font-size:14px" ng-click="changeClass()" data-toggle="collapse"  class="list-group-item list-group-item-warning" href="#collapse2" ><span id="spanname2" class="glyphicon glyphicon-collapse-up"></span>&nbsp;&nbsp;&nbsp;&nbsp;Employees Search By Center</a>
+        </h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse">
+         <div class="panel-body">
+       <span> Search:  <input type="text" ng-model="curPlace12" class="inputText"> </span>
+            <b> Select Center: </b>    <select style="width:400px" data-placeholder="Choose a center..." ng-model="center" ng-change="makeTodos()" data-toggle="collapse"  size=10>
+		      <option style="background-color:pink" ng-repeat="x in names | filter:curPlace12" value="{{x.id}}">{{x.name+"-"+x.id}}</option>
+		    </select>
+		    <button type="button" ng-click="employeeSearchByCenters()" class="btn btn-primary active">Populate </button>
+		    
+		    <span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span>
+		  </div>
+        <div class="panel-footer"> 
+        
+           <h2>Center Employees - {{center}}</h2>           
+          <span> Search:  <input type="text" ng-model="curPlace" class="inputText"> </span>
+         <table class="table table-striped">
+         <thead>
+         <tr >
+           <th style="text-align:center">ID</th>
+           <th style="text-align:center">LOGIN</th>
+           <th style="text-align:center">PASSWORD</th>
+           <th style="text-align:center">CATEGORY TYPE</th>
+         </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="place in todos | filter:curPlace">
+        <td>{{place.id}}</td>
+        <td>{{place.login}}</td>
+        <td>{{place.password}}</td> 
+        <td>{{place.categoryRef}}</td>
+        </tr></tbody>
+      </table> </div>
+      </div>
+    </div>
+  </div>
+
+
+<!--  end of search Emp -->
+             
+ <a class="list-group-item list-group-item-success"   data-toggle="collapse" data-target="#venkynav"><span id="spanname" class="glyphicon glyphicon-collapse-up"></span>&nbsp;&nbsp;&nbsp;&nbsp;Student Control Panel</a>
+</div>   
+
+
+  <!-- start Modal Pop-up -->
+  <div class="modal fade" id="myModal" role="dialog" ng-controller="myCtrl">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="background-color:lightpink">Student Cancellation</h4>
+        </div>
+        <div class="modal-body">
+            <form>
+    <div class="form-group">
+      <label for="usr">Login:</label>
+      <input type="text" class="form-control" ng-model="login" >
+    </div>
+    <div class="form-group">
+      <label for="pwd">Activity Code:</label>
+      <input type="text" class="form-control" ng-model="actCode">
+    </div>
+      <button type="button" ng-click="studentCancel()" class="btn btn-primary active">Submit </button>
+  </form>
+      </div>
+        <div class="modal-footer">
+         <h1><span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span></h1>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button><span style="color:red"><h3>{{status}}</h3></span>
+        </div>
+      </div>  
+    </div>
+    
+    
+
+  </div><!-- end Modal Pop-up -->
+
+
+<div class="collapse container" id="venkynav">
+  <h2>Student control panel</h2>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Profile</a></li>
+    <li><a data-toggle="tab" href="#menu1">Contracts</a></li>
+    <li><a data-toggle="tab" href="#menu2">Transfers</a></li>
+    <li><a data-toggle="tab" href="#menu3">Encounters</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+    <div class="panel-group" style="margin-bottom: 0px">
+    <div class="panel panel-default">
+      <div class="panel-heading" style="padding:0;background-color:lightpink">
+    
+      </div>
+   
+         <div class="panel-body">
+                  <b>Login: </b><input type="text" ng-model="stuLogin" class="inputText">
+        <button type="button" ng-click="studentLogin()" style="float:none" class="btn"> Submit </button>   <span style="color:red;font-weight:bold">   {{status}}</span>
+           <h1><span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span></h1>  
+		  </div>
+        <div class="panel-footer"> 
+       
+           <table class="table table-striped">
+	         <thead>
+		         <tr style="background-color:lightpink;align:left">
+			         <th style="text-align:left">ID</th>
+			         <th style="text-align:left">LOGIN</th>
+			         <th style="text-align:left">PASSWORD</th>
+			          <th style="text-align:left">FIRST-NAME</th>
+			           <th style="text-align:left">LAST-NAME</th>
+			         <th style="text-align:left">EMAIL</th>
+			           <th style="text-align:left">CENTER</th>
+			             <th style="text-align:left">CONTRACT-ID</th>
+			       
+		         </tr>
+	         </thead>
+	        <tbody>
+	        <tr >
+		        <td style="text-align:left">{{student.id}}</td>
+		        <td style="text-align:left">{{student.login}}</td>
+		        <td style="text-align:left">{{student.password}}</td> 
+		                    <td style="text-align:left">{{student.firstname}}</td>
+		                                <td style="text-align:left">{{student.lastname}}</td>
+		            <td style="text-align:left">{{student.email}}</td> 
+		          <td style="text-align:left">{{student.centerID}}</td> 
+		               <td style="text-align:left">{{student.status}}</td> 
+		     </tr>
+	     
+	       </tbody>
+         </table> </div>
+      
+    </div>
+  </div>
+    </div>
+    <div id="menu1" class="tab-pane fade" >
+   <div class="panel-group" style="margin-bottom: 0px">
+    <div class="panel panel-default">
+      <div class="panel-heading" style="padding:0;background-color:lightpink">
+    
+      </div>
+   
+         <div class="panel-body">
+                  <b>Login: </b><input type="text" ng-model="stuLogin" class="inputText">
+        <button type="button" ng-click="studentLogin()" style="float:none" class="btn"> Submit </button>   <span style="color:red;font-weight:bold">   {{status}}</span>
+           <h1><span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span></h1>  
+		  </div>
+        <div class="panel-footer"> 
+       
+           <table class="table table-striped">
+	         <thead>
+		         <tr style="background-color:lightpink;align:left">
+			         <th style="text-align:left">ID</th>
+			         <th style="text-align:left">CENTER</th>
+			          <th style="text-align:left">START_LEVEL</th>
+			           <th style="text-align:left">END_LEVEL</th>
+			            <th style="text-align:left">START_DATE</th>
+			             <th style="text-align:left">END_DATE</th>
+			              <th style="text-align:left">PRD_TYPE</th>
+			               <th style="text-align:left">EXT_DATE</th>
+			                <th style="text-align:left">REAL_END_DATE</th>
+			         <th style="text-align:left">END TYPE</th>
+			         <th style="text-align:left">VALID?</th>		       
+		         </tr>
+	         </thead>
+	        <tbody>
+	        <tr ng-repeat="contract in student.studentContracts" >
+		        <td style="text-align:left">{{contract.id}}</td>
+		         <td style="text-align:left">{{contract.centerID}}</td>
+		          <td style="text-align:left">{{contract.startLevel}}</td>
+		           <td style="text-align:left">{{contract.endLevel}}</td>
+		            <td style="text-align:left">{{contract.startDate}}</td>
+		             <td style="text-align:left">{{contract.endDate}}</td>
+		              <td style="text-align:left">{{contract.productType}}</td>
+		              <td style="text-align:left">{{contract.extensionDate}}</td>
+		              <td style="text-align:left">{{contract.realEndDate}}</td>
+		        <td style="text-align:left">{{contract.contractEndType}}</td>
+		        <td style="text-align:left">{{contract.isValidContract}}</td>	    
+		     </tr>
+	     
+	       </tbody>
+         </table> </div>
+      
+    </div>
+  </div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+  <div class="panel-group" style="margin-bottom: 0px">
+    <div class="panel panel-default">
+      <div class="panel-heading" style="padding:0;background-color:lightpink">
+    
+      </div>
+   
+         <div class="panel-body">
+                  <b>Login: </b><input type="text" ng-model="stuLogin" class="inputText">
+        <button type="button" ng-click="studentLogin()" style="float:none" class="btn"> Submit </button>   <span style="color:red;font-weight:bold">   {{status}}</span>
+           <h1><span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span></h1>  
+		  </div>
+        <div class="panel-footer"> 
+       
+           <table class="table table-striped">
+	         <thead>
+		         <tr style="background-color:lightpink;align:left">
+		          <th style="text-align:left">STUDENT_ID</th>
+			         <th style="text-align:left">TRANSFER_TO</th>
+			         <th style="text-align:left">TRANSFER_FROM</th>
+			         <th style="text-align:left">TRANSFER_DATE</th>	
+			          <th style="text-align:left">REQUESTED_DATE</th>	
+			           <th style="text-align:left">TRANSFER_STATUS</th>		       
+		         </tr>
+	         </thead>
+	        <tbody>
+	        <tr ng-repeat="transfer in student.studentTransfer" >
+	        <td style="text-align:left">{{transfer.studentID}}</td>
+		        <td style="text-align:left">{{transfer.centerTo}}</td>
+		        <td style="text-align:left">{{transfer.centerFrom}}</td>
+		        <td style="text-align:left">{{transfer.transferDate | date:'dd-MMM-yyyy' }}</td>	
+		        <td style="text-align:left">{{transfer.requestDate | date:'dd-MMM-yyyy' }}</td>	
+		        <td style="text-align:left">{{transfer.transferStatus}}</td>	    
+		     </tr>
+	     
+	       </tbody>
+         </table> </div>
+      
+    </div>
+  </div>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Menu 3</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+  </div>
+</div>
+
+  <!-- start Modal Pop-up -->
+  <div class="modal fade" id="forcesync" role="dialog" ng-controller="myCtrl">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="background-color:lightpink">Student Cancellation</h4>
+        </div>
+        <div class="modal-body">
+            <form>
+    <div class="form-group">
+      <label for="usr">Login:</label>
+      <input type="text" class="form-control" ng-model="login" >
+    </div>
+    <div class="form-group">
+      <label for="pwd">Activity Code:</label>
+      <input type="text" class="form-control" ng-model="actCode">
+    </div>
+      <button type="button" ng-click="studentCancel()" class="btn btn-primary active">Submit </button>
+  </form>
+      </div>
+        <div class="modal-footer">
+         <h1><span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span></h1>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button><span style="color:red"><h3>{{status}}</h3></span>
+        </div>
+      </div>  
+    </div>
+    
+    
+
+  </div><!-- end Modal Pop-up -->
+<script>
+
+
+function submitUpload(){
+	
+	if (document.getElementById('zones').checked) {
+		    document.getElementById("formUpload").action = "/Notifications/api/notification/forceSyncFromXls/"+document.getElementById("zones").value;
+		}
+	else{
+		document.getElementById("formUpload").action = "/Notifications/api/notification/forceSyncFromXls/z2";
+		}
+	document.getElementById("formUpload").submit();
+}
+
+
+var app = angular.module("controlPanel", ['ui.bootstrap']); 
+app.controller("myCtrl", function($scope,$http) {
+	
+	   $scope.filteredTodos = [];
+	   $scope.currentPage = 1;
+	   $scope.numPerPage = 10;
+	   $scope.maxSize = 5;	
+	   $scope.zone='z1';	   
+	   $scope.status ="";		
+	   $scope.loading = false;
+	   $scope.names = [];
+	   
+	   $scope.populateEmployeeCenters=function()
+	   {
+		   console.log(" Inside centers list");
+			 
+			 $http.get("/Notifications/api/notification/centerslist/"+$scope.zone)
+			    .then(function(response) {
+			    	 $scope.loading = false;	
+			    	 $scope.names = response.data;		
+			    	 
+			    });
+			 
+			 console.log(" Rendered centers list");
+	   }
+	   
+	   $scope.employeeSearchByCenters=function()
+	   {
+		   console.log(" Inside centers list");
+			 
+			 $http.get("/Notifications/api/notification/centerslist/"+$scope.zone)
+			    .then(function(response) {
+			    	 $scope.loading = false;	
+			    	 $scope.names = response.data;		
+			    	 
+			    });
+			 
+			 console.log(" Rendered centers list");
+	   }
+
+	   $scope.makeTodos = function() {
+	     $scope.todos = [];
+	     $http.get("/Notifications/api/notification/getEmployees/centerID/"+$scope.center+"/"+$scope.zone)
+		    .then(function(response) {
+		    
+		    	 $scope.todos=response.data;
+		   
+		    	 $scope.numPages = function () {
+		    		     return Math.ceil($scope.todos.length / $scope.numPerPage);
+		    		   };
+		    		
+		    		   $scope.$watch('currentPage + numPerPage', function() {
+		    		     var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+		    		     , end = begin + $scope.numPerPage;
+		    		     
+		    		     $scope.filteredTodos = $scope.todos.slice(begin, end);
+		    		   });
+		    	 
+		    });
+	   };
+	  
+
+
+	 document.getElementById("spanname1").className="glyphicon glyphicon-collapse-down";
+	 document.getElementById("spanname").className="glyphicon glyphicon-collapse-down";
+	 document.getElementById("spanname2").className="glyphicon glyphicon-collapse-down";
+	 
+	 $scope.changeClass=function() {	
+		 if(document.getElementById("spanname").className=="glyphicon glyphicon-collapse-down"){	
+				document.getElementById("spanname").className="glyphicon glyphicon-collapse-up";
+			}
+			else{
+					document.getElementById("spanname").className="glyphicon glyphicon-collapse-down";
+				}
+		 
+		if(document.getElementById("spanname1").className=="glyphicon glyphicon-collapse-down"){	
+			document.getElementById("spanname1").className="glyphicon glyphicon-collapse-up";
+		}
+		else{
+				document.getElementById("spanname1").className="glyphicon glyphicon-collapse-down";
+			}
+		
+		if(document.getElementById("spanname2").className=="glyphicon glyphicon-collapse-down"){	
+			document.getElementById("spanname2").className="glyphicon glyphicon-collapse-up";
+		}
+		else{
+				document.getElementById("spanname2").className="glyphicon glyphicon-collapse-down";
+			}
+	    }
+
+
+	 
+	 $scope.forceSyncUtility = function() {	
+		 $scope.loading = true;	
+		 $scope.sbMessage="";
+		 var x = document.getElementById("myFile").value;
+		    document.getElementById("spa").innerHTML = x;
+		 $http.get("/Notifications/api/notification/forceSync/"+$scope.zone)
+		    .then(function(response) {	
+		    
+		    	 $scope.sbMessage= response.data;		
+		    	 $scope.loading = false;	
+		    });
+	    }
+	 
+	 
+	 
+	 $scope.currentLevel = function() {
+	
+		 $scope.loading = true;	
+		 $http.get("/Notifications/api/notification/updateKeyNotFound/"+$scope.zone)
+		    .then(function(response) {
+		    	
+		    	 $scope.status = response.data.status;		
+		    	 $scope.loading = false;	
+		    });
+	    }
+	 
+
+	 
+	 $scope.studentLogin = function() {
+	
+		 $scope.loading = true;	
+		 $scope.student= null;
+
+		 $http.get("/Notifications/api/notification/getDetailsByLogin/"+$scope.stuLogin+"/"+$scope.zone)
+		    .then(function(response) {
+		    	
+		    	 $scope.student= response.data;		
+		    	 $scope.loading = false;	
+		    });
+	    }
+	 
+
+	 $scope.studentCancel = function(){	
+			 $scope.loading = true;
+			 $http.get("/Notifications/api/notification/cancelStudent/"+$scope.login+"/activityCode/"+$scope.actCode+"/"+$scope.zone)
+		    .then(function(response) {
+		    	 $scope.loading = false;	
+		    	 $scope.status = response.data.status;		
+		    	 
+		    });
+	    }
+	 
+
+	 $scope.actOR = function(){	
+			 $scope.loading = true;
+			 $http.get("/Notifications/api/notification/activateORContract/"+$scope.user+"/"+$scope.aycl+"/"+$scope.sdno+"/"+$scope.zone)
+		    .then(function(response) {
+		    	 $scope.loading = false;	
+		    	 $scope.status1 = response.data.status1;		
+		    	 
+		    });
+	    }
+	 
+	 $scope.studentProfileSync = function(){	
+		 $scope.loading = true;
+		 $http.get("/Notifications/api/notification/studentprofilesync/"+$scope.studentprofilelogin+"/"+$scope.zone)
+	    .then(function(response) {
+	    	 $scope.loading = false;	
+	    	 $scope.studentMessage = response.data;		
+	    	 
+	    });
+    }
+	 
+	 
+	 $scope.studentContractSync = function(){	
+		 $scope.loading = true;
+		 $http.get("/Notifications/api/notification/studentcontractsync/"+$scope.studentcontractlogin+"/"+$scope.zone)
+	    .then(function(response) {
+	    	 $scope.loading = false;	
+	    	 $scope.studentContractMessage = response.data;		
+	    	 
+	    });
+    }
+	 
+	 $scope.reassignConsultantSync = function(){	
+		 $scope.loading = true;
+		 $http.get("/Notifications/api/notification/reassignConsultant/"+$scope.studentcontractlogin+"/"+$scope.zone)
+	    .then(function(response) {
+	    	 $scope.loading = false;	
+	    	 $scope.studentContractMessage = response.data;		
+	    	 
+	    });
+    }
+	 
+	 $scope.reassignPT = function(){	
+		 $scope.loading = true;
+		 $http.get("/Notifications/api/notification/reassignPT/"+$scope.studentcontractlogin+"/"+$scope.zone)
+	    .then(function(response) {
+	    	 $scope.loading = false;	
+	    	 $scope.studentContractMessage = response.data;		
+	    	 
+	    });
+    }
+	 
+	
+	 
+	 
+	 $scope.getEmployees = function(){	
+		 $scope.loading = true;			
+		 $scope.showMe = false;
+	
+    }
+	
+	
+   
+});
+</script>
+
+</body>
+</html>
