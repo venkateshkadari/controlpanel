@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html  ng-app="controlPanel" ng-controller="myCtrl">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<meta charset="ISO-8859-1">
+<title>Key Not Found</title>
+</head>
+<body>
+
+<div class="container" style="background-color:Gainsboro">
+  <h2>Student cancellation</h2><br><br><br>
+  <button type="button" ng-click="currentLevel()" class="btn btn-primary active">  Click to Run Procedure!! </button>
+  
+  <div><span style="color:red"><h3>{{status}}</h3></span>
+    <span  ng-if="loading"><img src="/Notifications/images/loading.gif"></img></span>
+  </div>
+  
+  </div>
+
+<script>
+var app = angular.module("controlPanel", []); 
+app.controller("myCtrl", function($scope,$http) {
+	
+	 $scope.status ="";		
+	 $scope.loading = false;	
+	 $scope.currentLevel = function() {
+		 $scope.loading = true;	
+		 $http.get("http://localhost:8080/Notifications/api/notification/cancelStudent/1234/activityCode/4567")
+		    .then(function(response) {
+		    	 $scope.status = response.data.status;		
+		    	 $scope.loading = false;	
+		    });
+	    }
+	
+	
+   
+});
+</script>
+</body>
+</html>
